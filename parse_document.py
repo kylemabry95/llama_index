@@ -16,6 +16,15 @@ DOCS_PATH = "data"
 def upload_documents_and_generate_response(pdf_files, user_query):
     """This function uploads files provided by the user, accepts a user-specified query"""
 
+    # Remove any existing files in the DOCS_PATH directory from the last run.
+    for filename in os.listdir(DOCS_PATH):
+        file_path = os.path.join(DOCS_PATH, filename)
+        try:
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        except Exception as e:
+            print(f"Error removing file {file_path}: {e}")
+
     # Set up parser
     parser = LlamaParse(
         result_type="markdown"  # "markdown" and "text" are available

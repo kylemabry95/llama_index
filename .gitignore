@@ -1,3 +1,4 @@
 keys.env
 data/
 *.txt
+*.DS_Store

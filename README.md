@@ -18,7 +18,8 @@ names: `LLAMA_CLOUD_API_KEY` and `OPENAI_API_KEY`
 
 - From the terminal, run the following command to activate the fastAPI server hosted by uvicorn: `python3 main.py`
 
-- In a web-browser of your choice navigate to `http://localhost:5001/docs` and upload your PDF files.
+- In a web-browser of your choice navigate to `http://localhost:5001/docs` and upload your PDF files + enter the
+prompt for the AI to solve.
 
 - When you're ready to integrate the application into a Kubernetes cluster, run the following code in the terminal 
 (with Docker running in the background) to build a portable Docker image: `docker build .`

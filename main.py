@@ -13,16 +13,17 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
+    """Root function."""
     return {"message": "Hello, this is the root!"}
 
 @app.post("/upload_documents_and_generate_reponse")
 def create_response(user_query: str, pdf_files: List[UploadFile]):
     """This function uploads files provided by the user, accepts a user-specified query,
       and returns a response based on the user's query."""
-    
+
     # Upload documents and generate a response from OpenAI
     response = upload_documents_and_generate_response(pdf_files, user_query)
-    
+
     return {"response": response}
 
 

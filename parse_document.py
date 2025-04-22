@@ -2,9 +2,10 @@
 
 # bring in package dependencies
 import os
+import dspy
 from dotenv import load_dotenv
 from llama_cloud_services import LlamaParse
-from llama_index.core import SimpleDirectoryReader, VectorStoreIndex
+from llama_index.core import SimpleDirectoryReader
 
 # Bring in our env vars
 load_dotenv("keys.env")
@@ -49,17 +50,14 @@ def upload_documents_and_generate_response(pdf_files, user_query):
             f.write(doc.text)
             f.write("\n\n")  # Add a newline between documents
 
+    # Load gpt-40-mini model from OpenAI
+    lm = dspy.LM('openai/gpt-4o-mini', api_key=os.getenv("OPENAI_API_KEY"))
+    dspy.configure(lm=lm)
 
-    # Create an index from the parsed markdown
-    index = VectorStoreIndex.from_documents(documents)
+    # Set up the guardrails for the model to follow when generating a response
+    rag = dspy.ChainOfThought('context, question -> response')
 
-    # Create a query engine for the index
-    query_engine = index.as_query_engine()
+    response = rag(context=documents, question=user_query)
 
-    # Query the engine
-    response = query_engine.query(user_query)
-
-    # Return the response for debugging
-    print(response)
 
     return response

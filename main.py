@@ -7,6 +7,7 @@ from fastapi import UploadFile
 import uvicorn
 
 from parse_document import upload_documents_and_generate_response
+from helpers import save_response
 
 
 app = FastAPI()
@@ -25,15 +26,9 @@ def create_response(user_query: str, pdf_files: List[UploadFile]):
     response = upload_documents_and_generate_response(pdf_files, user_query)
 
     # Save the response to a text file locally.
-    save_response(response)
+    save_response(user_query, response)
 
     return {"response": response}
-
-def save_response(response):
-    """This function saves the response to a text file locally."""
-    with open("generated_responses.txt", "a", encoding="utf-8") as f:
-        f.write(response)
-        f.write("\n\n\n New Response \n\n\n")
 
 # This is the main entry point for the FastAPI application.
 if __name__ == "__main__":

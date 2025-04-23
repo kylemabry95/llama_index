@@ -1,4 +1,4 @@
-"""This is the scripit responsible for running our code."""
+"""This is the script responsible for running our code."""
 
 # Fast API imports for web server and post requests
 from typing import List
@@ -24,8 +24,16 @@ def create_response(user_query: str, pdf_files: List[UploadFile]):
     # Upload documents and generate a response from OpenAI
     response = upload_documents_and_generate_response(pdf_files, user_query)
 
+    # Save the response to a text file locally.
+    save_response(response)
+
     return {"response": response}
 
+def save_response(response):
+    """This function saves the response to a text file locally."""
+    with open("generated_responses.txt", "a", encoding="utf-8") as f:
+        f.write(response)
+        f.write("\n\n\n New Response \n\n\n")
 
 # This is the main entry point for the FastAPI application.
 if __name__ == "__main__":

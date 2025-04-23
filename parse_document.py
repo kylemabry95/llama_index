@@ -50,7 +50,7 @@ def upload_documents_and_generate_response(pdf_files, user_query):
             f.write(doc.text)
             f.write("\n\n")  # Add a newline between documents
 
-    # Load gpt-40-mini model from OpenAI
+    # Load gpt-40-mini model from OpenAI using the DSPy framework
     lm = dspy.LM('openai/gpt-4o-mini', api_key=os.getenv("OPENAI_API_KEY"))
     dspy.configure(lm=lm)
 
@@ -58,6 +58,5 @@ def upload_documents_and_generate_response(pdf_files, user_query):
     rag = dspy.ChainOfThought('context, question -> response')
 
     response = rag(context=documents, question=user_query)
-
 
     return response

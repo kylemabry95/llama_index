@@ -38,7 +38,7 @@ def upload_documents_and_generate_response(pdf_files, user_query):
     save_parsed_document(documents)
 
     # Load gpt-40-mini model from OpenAI using the DSPy framework
-    lm = dspy.LM('openai/gpt-4o-mini', api_key=os.getenv("OPENAI_API_KEY"))
+    lm = dspy.LM('openai/gpt-4o-mini', api_key = os.getenv("OPENAI_API_KEY"))
     dspy.configure(lm=lm)
 
     # Set up the guardrails for the model to follow when generating a response

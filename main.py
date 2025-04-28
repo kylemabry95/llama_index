@@ -8,6 +8,7 @@ import uvicorn
 
 from parse_document import upload_documents_and_generate_response
 from helpers import save_response
+from llama_calculator import solve_math_problem
 
 
 app = FastAPI()
@@ -29,6 +30,15 @@ def create_response(user_query: str, pdf_files: List[UploadFile]):
     save_response(user_query, response)
 
     return {"response": response}
+
+@app.post("/calculator")
+def calculator(question: str):
+    """This function acts as a calculator, it takes a math
+        problem as input and returns the answer."""
+
+    answer = solve_math_problem(question)
+
+    return {"answer": answer}
 
 # This is the main entry point for the FastAPI application.
 if __name__ == "__main__":

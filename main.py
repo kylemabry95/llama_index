@@ -25,12 +25,12 @@ def create_response(user_query: str, pdf_files: List[UploadFile]):
       and returns a response based on the user's query."""
 
     # Upload documents and generate a response from OpenAI
-    response = upload_documents_and_generate_response(pdf_files, user_query)
+    answer = upload_documents_and_generate_response(pdf_files, user_query)
 
     # Save the response to a text file locally.
-    save_response(user_query, response)
+    save_response(user_query, answer)
 
-    return {"response": response}
+    return {"response": answer}
 
 @app.post("/calculator")
 def calculator(question: str):

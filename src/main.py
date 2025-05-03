@@ -6,10 +6,10 @@ from fastapi import FastAPI
 from fastapi import UploadFile
 import uvicorn
 
-from parse_document import upload_documents_and_generate_response
-from helpers import save_response
-from llama_calculator import solve_math_problem
-from wikipedia_rag_model import search_wikipedia_react
+from src.parse_document import upload_documents_and_generate_response
+from src.helpers import save_response
+from src.llama_calculator import solve_math_problem
+from src.wikipedia_rag_model import search_wikipedia_react
 
 
 app = FastAPI()
@@ -17,6 +17,7 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     """Root function."""
+    
     return {"message": "Hello, this is the root!"}
 
 @app.post("/upload_documents_and_generate_reponse")

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from llama_cloud_services import LlamaParse
 from llama_index.core import SimpleDirectoryReader
 
-from helpers import save_parsed_document, clean_directory, save_uploaded_files
+from src.helpers import save_parsed_document, clean_directory, save_uploaded_files
 
 # Bring in our env vars
 load_dotenv("keys.env")
@@ -21,7 +21,7 @@ def upload_documents_and_generate_response(pdf_files, user_query):
 
     # Remove any existing files in the DOCS_PATH directory from the last run.
     clean_directory(DOCS_PATH)
-
+    
     # Set up parser
     parser = LlamaParse(
         result_type="markdown"  # "markdown" and "text" are available

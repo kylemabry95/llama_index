@@ -48,7 +48,7 @@ def calculator(question: str):
 @app.post("/search_wikipedia")
 def search_wikipedia(query: str):
     """This function searches Wikipedia for a given query and returns the top 3 results."""
-    
+
     answer = search_wikipedia_react(query)
 
     # Save the response to a text file locally.

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from llama_cloud_services import LlamaParse
 from llama_index.core import SimpleDirectoryReader
 
-from src.helpers import save_parsed_document, clean_directory, save_uploaded_files
+from helpers import save_parsed_document, clean_directory, save_uploaded_files
 
 # Bring in our env vars
 load_dotenv("keys.env")

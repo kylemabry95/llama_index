@@ -16,7 +16,7 @@ names: `LLAMA_CLOUD_API_KEY` and `OPENAI_API_KEY`
 - To install dependencies and run the script enter the two following commands in the terminal:
 `pip install -r requirements.txt`
 
-- From the terminal, run the following command to activate the fastAPI server hosted by uvicorn: `python3 main.py`
+- From the terminal, run the following command to activate the fastAPI server hosted by uvicorn: `python3 src/main.py`
 
 - In a web-browser of your choice navigate to `http://localhost:5001/docs` and upload your PDF files + enter the
 prompt for the AI to solve.

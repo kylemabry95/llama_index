@@ -31,5 +31,8 @@ def save_response(user_query, response):
     """This function saves the response to a text file locally."""
     with open("generated_responses.txt", "a", encoding="utf-8") as f:
         f.write("User query: " + user_query + "\n\n")
-        f.write("User response: " + response.get("response", ""))
+        try:
+            f.write("User response: " + response.get("response", ""))
+        except Exception as e:
+            f.write("User response: " + str(response))
         f.write("\n\n\n New Response \n\n\n")

@@ -9,6 +9,7 @@ import uvicorn
 from parse_document import upload_documents_and_generate_response
 from helpers import save_response
 from llama_calculator import solve_math_problem
+from wikipedia_rag_model import search_wikipedia_react
 
 
 app = FastAPI()
@@ -40,6 +41,17 @@ def calculator(question: str):
 
     # Save the response to a text file locally.
     save_response(question, answer)
+
+    return {"answer": answer}
+
+@app.post("/search_wikipedia")
+def search_wikipedia(query: str):
+    """This function searches Wikipedia for a given query and returns the top 3 results."""
+    
+    answer = search_wikipedia_react(query)
+
+    # Save the response to a text file locally.
+    save_response(query, answer)
 
     return {"answer": answer}
 

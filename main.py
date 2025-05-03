@@ -38,6 +38,9 @@ def calculator(question: str):
 
     answer = solve_math_problem(question)
 
+    # Save the response to a text file locally.
+    save_response(question, answer)
+
     return {"answer": answer}
 
 # This is the main entry point for the FastAPI application.

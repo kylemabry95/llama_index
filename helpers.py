@@ -34,5 +34,6 @@ def save_response(user_query, response):
         try:
             f.write("User response: " + response.get("response", ""))
         except Exception as e:
+            print(f"Error writing response: {e}")
             f.write("User response: " + str(response))
         f.write("\n\n\n New Response \n\n\n")

@@ -15,7 +15,7 @@ def clean_directory(DOCS_PATH):
 def save_uploaded_files(pdf_files):
     """This function saves the uploaded files to the local directory."""
     for file in pdf_files:
-        file_path = os.path.join("../data", file.filename)
+        file_path = os.path.join("data", file.filename)
         with open(file_path, "wb") as buffer:
             file_content = file.file.read()
             buffer.write(file_content)

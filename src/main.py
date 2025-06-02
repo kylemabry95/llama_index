@@ -5,11 +5,14 @@ from typing import List
 from fastapi import FastAPI
 from fastapi import UploadFile
 import uvicorn
+import requests
+from PIL import Image
 
 from parse_document import upload_documents_and_generate_response
 from helpers import save_response
 from llama_calculator import solve_math_problem
 from wikipedia_rag_model import search_wikipedia_react
+from image_generation import generate
 
 
 app = FastAPI()
@@ -25,10 +28,8 @@ def create_response(user_query: str, pdf_files: List[UploadFile]):
     """This function uploads files provided by the user, accepts a user-specified query,
       and returns a response based on the user's query."""
 
-    # Upload documents and generate a response from OpenAI
     answer = upload_documents_and_generate_response(pdf_files, user_query)
 
-    # Save the response to a text file locally.
     save_response(user_query, answer)
 
     return {"response": answer}
@@ -40,7 +41,6 @@ def calculator(question: str):
 
     answer = solve_math_problem(question)
 
-    # Save the response to a text file locally.
     save_response(question, answer)
 
     return {"answer": answer}
@@ -51,10 +51,17 @@ def search_wikipedia(query: str):
 
     answer = search_wikipedia_react(query)
 
-    # Save the response to a text file locally.
     save_response(query, answer)
 
     return {"answer": answer}
+
+@app.post("/generate_image")
+def generate_image(prompt: str):
+    """This function generates an image based on the provided prompt."""
+
+    response = generate(prompt)
+
+    return {"generated image": response}
 
 # This is the main entry point for the FastAPI application.
 if __name__ == "__main__":
